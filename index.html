@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>COGS 187A — Class Activity 0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f7f8fb;--card:#fff;--text:#111827;--muted:#667085;--line:#e5e7eb;--accent:#182b49;--soft:#eef3f8;--good:#146c43;--bad:#b42318}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text)}
+    .wrap{max-width:1120px;margin:auto;padding:34px 20px 64px}.top{display:flex;gap:20px;align-items:flex-start;justify-content:space-between;margin-bottom:20px}
+    h1{font-size:32px;line-height:1.12;margin:4px 0 8px}.eyebrow{font-size:13px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+    .sub{color:var(--muted);max-width:780px;line-height:1.55}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin:18px 0;box-shadow:0 4px 18px rgba(17,24,39,.03)}
+    .card h2{font-size:19px;margin:0 0 14px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.grid4{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    label{display:block;font-size:13px;font-weight:700;margin-bottom:7px}input,textarea,select{width:100%;border:1px solid #d0d5dd;border-radius:10px;padding:11px 12px;font:inherit;background:white}textarea{min-height:96px;resize:vertical}
+    .prompt{padding:14px;border-radius:12px;background:var(--soft);font-size:14px;line-height:1.55}.hint{font-size:12px;color:var(--muted);margin-top:6px}.upload{border:1.5px dashed #b6c0cf;border-radius:14px;padding:15px;background:#fbfcfe}.upload img{width:100%;height:185px;object-fit:contain;background:#f4f6f8;border-radius:10px;margin-top:10px;display:none}
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.step{padding:12px;border-radius:12px;background:white;border:1px solid var(--line);font-size:13px}.step b{display:block;margin-bottom:5px}
+    .btn{border:0;border-radius:11px;padding:12px 18px;font-weight:800;font-size:14px;cursor:pointer}.btn.primary{background:var(--accent);color:white}.btn.secondary{background:white;color:var(--accent);border:1px solid #c7d0dd}.actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.status{font-size:13px;color:var(--muted)}
+    .success{display:none;background:#ecfdf3;border:1px solid #abefc6;color:var(--good);padding:16px;border-radius:14px;margin-top:16px}.error{display:none;background:#fef3f2;border:1px solid #fecdca;color:var(--bad);padding:16px;border-radius:14px;margin-top:16px}
+    .required{color:#b42318}.footer{font-size:12px;color:var(--muted);margin-top:28px}.privacy{font-size:12px;color:var(--muted);line-height:1.5}
+    @media(max-width:760px){.grid2,.grid4,.steps{grid-template-columns:1fr}.top{display:block}h1{font-size:27px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="top"><div><div class="eyebrow">COGS 187A · Class Activity 0</div><h1>AI and Knowledge of the User</h1><div class="sub">Work with your group to compare what two AI tools create before and after you give them information about the intended users. Upload your evidence and submit one group response here.</div></div></div>
+
+    <section class="card">
+      <h2>What you’ll do</h2>
+      <div class="steps"><div class="step"><b>1 · Run</b>Use the same base prompt in two AI tools.</div><div class="step"><b>2 · Add users</b>Repeat in fresh chats with the audience detail.</div><div class="step"><b>3 · Compare</b>Look for specific changes and assumptions.</div><div class="step"><b>4 · Submit</b>Upload four screenshots and your strongest finding.</div></div>
+    </section>
+
+    <form id="submissionForm">
+      <section class="card">
+        <h2>Your group</h2>
+        <div class="grid2">
+          <div><label>Group name / number <span class="required">*</span></label><input id="groupName" required placeholder="e.g., Group 7" /></div>
+          <div><label>Student names <span class="required">*</span></label><input id="studentNames" required placeholder="e.g., Maya Chen, Alex Rivera, Jordan Lee" /><div class="hint">Enter all group members, separated by commas.</div></div>
+          <div><label>AI Tool 1 <span class="required">*</span></label><input id="tool1" required placeholder="e.g., ChatGPT" /></div>
+          <div><label>AI Tool 2 <span class="required">*</span></label><input id="tool2" required placeholder="e.g., Gemini" /></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Round 1 · No audience details</h2>
+        <div class="prompt"><b>Use this exact prompt in both tools:</b><br><br>“Create a website homepage for a university photography club. Include a way to join and a section for upcoming events.”<br><br>If the tool asks questions, save them, then reply: <b>“Please proceed using your own assumptions.”</b></div>
+      </section>
+
+      <section class="card">
+        <h2>Round 2 · Add user knowledge</h2>
+        <div class="prompt"><b>Start a fresh conversation. Use the Round 1 prompt, then add:</b><br><br>“The club welcomes complete beginners as well as experienced photographers. Some members use only phone cameras.”</div>
+      </section>
+
+      <section class="card">
+        <h2>Upload your four results</h2>
+        <div class="grid4">
+          <div class="upload"><label>Tool 1 · Without audience details <span class="required">*</span></label><input id="shot1" type="file" accept="image/*" required><img id="prev1"></div>
+          <div class="upload"><label>Tool 1 · With audience details <span class="required">*</span></label><input id="shot2" type="file" accept="image/*" required><img id="prev2"></div>
+          <div class="upload"><label>Tool 2 · Without audience details <span class="required">*</span></label><input id="shot3" type="file" accept="image/*" required><img id="prev3"></div>
+          <div class="upload"><label>Tool 2 · With audience details <span class="required">*</span></label><input id="shot4" type="file" accept="image/*" required><img id="prev4"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>What did you find?</h2>
+        <div class="grid2">
+          <div><label>Strongest finding <span class="required">*</span></label><textarea id="finding" required placeholder="In 1–2 sentences, what changed most meaningfully?"></textarea></div>
+          <div><label>Visible evidence <span class="required">*</span></label><textarea id="evidence" required placeholder="Point to something specific in the outputs that supports your finding."></textarea></div>
+          <div><label>One useful AI question or assumption <span class="required">*</span></label><textarea id="assumption" required placeholder="What did the AI ask or assume that was interesting?"></textarea></div>
+          <div><label>One remaining problem <span class="required">*</span></label><textarea id="problem" required placeholder="What did the AI still miss, misunderstand, or leave uncertain?"></textarea></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Submit your group activity</h2>
+        <div class="privacy">Only submit material created for this class activity. Your names and screenshots will be stored with your group response for course review.</div><br>
+        <div class="actions"><button id="submitBtn" class="btn primary" type="submit">Submit Activity</button><span id="status" class="status"></span></div>
+        <div id="success" class="success"><b>Submitted.</b> Your group response has been received. You may close this page.</div>
+        <div id="error" class="error"></div>
+      </section>
+    </form>
+    <div class="footer">COGS 187A · Usability & Information Architecture · UC San Diego</div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script>
+    const cfg = window.COGS187A_CONFIG;
+    const sb = supabase.createClient(cfg.supabaseUrl, cfg.supabasePublishableKey);
+    let currentUser = null;
+
+    async function ensureAnonymousUser(){
+      const {data:{session}} = await sb.auth.getSession();
+      if(session?.user){ currentUser = session.user; return; }
+      const {data,error} = await sb.auth.signInAnonymously();
+      if(error) throw error;
+      currentUser = data.user;
+    }
+
+    for(let i=1;i<=4;i++){
+      document.getElementById('shot'+i).addEventListener('change', e=>{
+        const f=e.target.files[0]; if(!f)return; const img=document.getElementById('prev'+i); img.src=URL.createObjectURL(f); img.style.display='block';
+      });
+    }
+
+    async function uploadImage(file, slot){
+      const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+      const path = `${currentUser.id}/${Date.now()}_${slot}_${safeName}`;
+      const {error} = await sb.storage.from('activity-screenshots').upload(path,file,{upsert:false,contentType:file.type});
+      if(error) throw error;
+      return path;
+    }
+
+    document.getElementById('submissionForm').addEventListener('submit', async e=>{
+      e.preventDefault();
+      const btn=document.getElementById('submitBtn'), status=document.getElementById('status'), errBox=document.getElementById('error'), okBox=document.getElementById('success');
+      errBox.style.display='none'; okBox.style.display='none'; btn.disabled=true; status.textContent='Submitting…';
+      try{
+        await ensureAnonymousUser();
+        const files=[1,2,3,4].map(i=>document.getElementById('shot'+i).files[0]);
+        if(files.some(f=>!f)) throw new Error('Please upload all four screenshots.');
+        const paths=[];
+        for(let i=0;i<4;i++){ status.textContent=`Uploading screenshot ${i+1} of 4…`; paths.push(await uploadImage(files[i],i+1)); }
+        status.textContent='Saving your group response…';
+        const payload={
+          submitted_by: currentUser.id,
+          group_name: document.getElementById('groupName').value.trim(),
+          student_names: document.getElementById('studentNames').value.trim(),
+          tool_1: document.getElementById('tool1').value.trim(),
+          tool_2: document.getElementById('tool2').value.trim(),
+          screenshot_1: paths[0], screenshot_2: paths[1], screenshot_3: paths[2], screenshot_4: paths[3],
+          strongest_finding: document.getElementById('finding').value.trim(),
+          visible_evidence: document.getElementById('evidence').value.trim(),
+          ai_question_or_assumption: document.getElementById('assumption').value.trim(),
+          remaining_problem: document.getElementById('problem').value.trim()
+        };
+        const {error} = await sb.from('activity_submissions').insert(payload);
+        if(error) throw error;
+        status.textContent=''; okBox.style.display='block'; btn.textContent='Submitted';
+        window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+      } catch(err){
+        console.error(err); errBox.textContent = err.message || 'Something went wrong. Please try again.'; errBox.style.display='block'; status.textContent=''; btn.disabled=false;
+      }
+    });
+
+    ensureAnonymousUser().catch(err=>{ console.error(err); document.getElementById('error').textContent='This activity portal is not connected yet. Please tell your TA.'; });
+  </script>
+</body>
+</html>
