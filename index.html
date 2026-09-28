@@ -15,7 +15,7 @@
     .sub{color:var(--muted);max-width:780px;line-height:1.55}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin:18px 0;box-shadow:0 4px 18px rgba(17,24,39,.03)}
     .card h2{font-size:19px;margin:0 0 14px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.grid4{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     label{display:block;font-size:13px;font-weight:700;margin-bottom:7px}input,textarea,select{width:100%;border:1px solid #d0d5dd;border-radius:10px;padding:11px 12px;font:inherit;background:white}textarea{min-height:96px;resize:vertical}
-    .prompt{padding:14px;border-radius:12px;background:var(--soft);font-size:14px;line-height:1.55}.hint{font-size:12px;color:var(--muted);margin-top:6px}.upload{border:1.5px dashed #b6c0cf;border-radius:14px;padding:15px;background:#fbfcfe}.upload img{width:100%;height:185px;object-fit:contain;background:#f4f6f8;border-radius:10px;margin-top:10px;display:none}
+    .prompt{padding:18px;border-radius:12px;background:var(--soft);font-size:14px;line-height:1.65}.instruction-list{margin:0;padding-left:22px}.instruction-list li{margin:0 0 16px}.instruction-list li:last-child{margin-bottom:0}.prompt-text{display:block;margin-top:8px;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:10px;line-height:1.6}.hint{font-size:12px;color:var(--muted);margin-top:6px}.upload{border:1.5px dashed #b6c0cf;border-radius:14px;padding:15px;background:#fbfcfe}.upload img{width:100%;height:185px;object-fit:contain;background:#f4f6f8;border-radius:10px;margin-top:10px;display:none}
     .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.step{padding:12px;border-radius:12px;background:white;border:1px solid var(--line);font-size:13px}.step b{display:block;margin-bottom:5px}
     .btn{border:0;border-radius:11px;padding:12px 18px;font-weight:800;font-size:14px;cursor:pointer}.btn.primary{background:var(--accent);color:white}.btn.secondary{background:white;color:var(--accent);border:1px solid #c7d0dd}.actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.status{font-size:13px;color:var(--muted)}
     .success{display:none;background:#ecfdf3;border:1px solid #abefc6;color:var(--good);padding:16px;border-radius:14px;margin-top:16px}.error{display:none;background:#fef3f2;border:1px solid #fecdca;color:var(--bad);padding:16px;border-radius:14px;margin-top:16px}
@@ -45,12 +45,12 @@
 
       <section class="card">
         <h2>Round 1 · No audience details</h2>
-        <div class="prompt"><b>Use this exact prompt in both tools:</b><br><br>“Create a website homepage for a university photography club. Include a way to join and a section for upcoming events.”<br><br>If the tool asks questions, save them, then reply: <b>“Please proceed using your own assumptions.”</b></div>
+        <div class="prompt"><ol class="instruction-list"><li><b>Use this exact prompt in both tools:</b><span class="prompt-text">“Create a website homepage for a university photography club. Include a way to join and a section for upcoming events.”</span></li><li>If the tool asks questions, save them.</li><li>Then reply:<span class="prompt-text"><b>“Please proceed using your own assumptions.”</b></span></li></ol></div>
       </section>
 
       <section class="card">
         <h2>Round 2 · Add user knowledge</h2>
-        <div class="prompt"><b>Start a fresh conversation. Use the Round 1 prompt, then add:</b><br><br>“The club welcomes complete beginners as well as experienced photographers. Some members use only phone cameras.”</div>
+        <div class="prompt"><ol class="instruction-list"><li><b>Start a fresh conversation.</b></li><li>Use the same Round 1 prompt again.</li><li>Then add:<span class="prompt-text">“The club welcomes complete beginners as well as experienced photographers. Some members use only phone cameras.”</span></li></ol></div>
       </section>
 
       <section class="card">
