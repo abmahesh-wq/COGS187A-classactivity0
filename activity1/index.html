@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>COGS 187A — Class Activity 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f7f8fb;--card:#fff;--text:#111827;--muted:#667085;--line:#e5e7eb;--accent:#182b49;--soft:#eef3f8}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text)}
+    .shell{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;padding:28px 18px;background:#fff;border-right:1px solid var(--line)}
+    .brand{font-weight:800;color:var(--accent);font-size:14px;margin-bottom:24px}.navlink{display:block;text-decoration:none;color:#344054;padding:11px 12px;border-radius:10px;margin:6px 0;font-size:14px;font-weight:600}.navlink:hover{background:#f2f4f7}.navlink.active{background:var(--accent);color:white}.navmeta{font-size:11px;color:var(--muted);margin:4px 12px 18px}
+    .wrap{max-width:1120px;margin:auto;padding:34px 20px 64px}.top{margin-bottom:20px}.eyebrow{font-size:13px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}h1{font-size:32px;line-height:1.12;margin:4px 0 8px}.sub{color:var(--muted);max-width:800px;line-height:1.6}
+    .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:18px 0;box-shadow:0 4px 18px rgba(17,24,39,.03)}.card h2{font-size:19px;margin:0 0 14px}.card h3{font-size:15px;margin:0 0 8px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .persona{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fafafa}.persona p,.prompt,.discussion li,.steps li{font-size:14px;line-height:1.6}.prompt{padding:16px;border-radius:12px;background:var(--soft)}.prompt-text{display:block;margin-top:8px;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:10px;line-height:1.6}.steps{padding-left:22px;margin:0}.steps li{margin:0 0 14px}.discussion{padding-left:22px;margin-bottom:0}.discussion li{margin:8px 0}.callout{border-left:4px solid var(--accent);padding:12px 14px;background:#f8fafc;border-radius:8px;font-size:14px;line-height:1.6}.footer{font-size:12px;color:var(--muted);margin-top:28px}
+    @media(max-width:760px){.shell{display:block}.sidebar{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:14px 16px}.brand{margin-bottom:10px}.navlink{display:inline-block;margin:4px 6px 4px 0}.navmeta{display:none}.grid3,.grid2{grid-template-columns:1fr}h1{font-size:27px}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand">COGS 187A</div>
+    <a class="navlink" href="/">Class Activity 0</a>
+    <div class="navmeta">AI and Knowledge of the User</div>
+    <a class="navlink active" href="/activity1">Class Activity 1</a>
+    <div class="navmeta">Personalized Interfaces</div>
+  </aside>
+
+  <main class="wrap">
+    <div class="top">
+      <div class="eyebrow">COGS 187A · Class Activity 1</div>
+      <h1>Personalized Interfaces</h1>
+      <div class="sub">Last time, we saw that AI changes its design when it knows more about the user. Today, we take the next step: what happens when the interface itself adapts to each individual user?</div>
+    </div>
+
+    <section class="card">
+      <h2>Big question</h2>
+      <div class="callout"><b>If a system can know each user individually, should every user get a different interface?</b><br><br>Your group will explore how personalization changes information architecture, what data the system would need, and where personalization becomes uncomfortable or inappropriate.</div>
+    </section>
+
+    <section class="card">
+      <h2>Meet the users</h2>
+      <div class="grid3">
+        <div class="persona"><h3>Maya · Beginner</h3><p>First-year student. Complete beginner. Uses only an iPhone. Mainly wants to meet people and feel comfortable joining.</p></div>
+        <div class="persona"><h3>Daniel · Experienced</h3><p>Experienced photographer. Owns a mirrorless camera. Interested in advanced workshops, competitions, and showcasing work.</p></div>
+        <div class="persona"><h3>Sam · Returning member</h3><p>Busy graduate student. Has attended before. Mainly wants to see upcoming events and RSVP quickly.</p></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Part 1 · Design three personalized homepages</h2>
+      <ol class="steps">
+        <li>Use the same university photography club as the previous activity.</li>
+        <li>For each user, decide what they should see <b>first</b>, what should be <b>de-emphasized</b>, and what may not need to appear on the homepage at all.</li>
+        <li>Focus on <b>information hierarchy</b>, not just colors or visual styling.</li>
+        <li>Sketch the top section of the homepage for Maya, Daniel, and Sam.</li>
+      </ol>
+      <div class="prompt"><b>Optional AI prompt:</b><span class="prompt-text">“You are designing the homepage of a university photography club. Here is everything we know about the current user: [PASTE USER PROFILE]. Decide what this person should see first, what should be de-emphasized, and what should not appear on the homepage. Explain your information hierarchy.”</span></div>
+    </section>
+
+    <section class="card">
+      <h2>Part 2 · What does the system need to know?</h2>
+      <div class="grid2">
+        <div class="persona"><h3>Useful information</h3><p>List the user information that would help personalize the homepage. Examples: skill level, device, prior attendance, interests, availability, previous RSVPs.</p></div>
+        <div class="persona"><h3>How would the system know?</h3><p>For each item, decide whether it comes from explicit user input, past behavior, account history, location, inferred behavior, or another source.</p></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Part 3 · The personalization line</h2>
+      <p class="sub">For each item below, decide whether you would allow the website to use it for personalization. Be ready to explain why.</p>
+      <div class="grid2">
+        <div class="persona"><h3>More comfortable</h3><p>Self-selected skill level<br>Previous club events attended<br>Pages previously clicked<br>Camera / device used</p></div>
+        <div class="persona"><h3>More questionable</h3><p>Precise location<br>Age<br>Instagram activity<br>Other websites visited<br>Past AI conversations</p></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Part 4 · Group discussion</h2>
+      <ul class="discussion">
+        <li>When does personalization become more useful than one universal homepage?</li>
+        <li>At what point does personalization become “creepy”?</li>
+        <li>Should users know why their interface looks different?</li>
+        <li>Should users be able to turn personalization off?</li>
+        <li>If every user sees a different navigation structure, do we still have one information architecture?</li>
+        <li>Who should decide what information the system is allowed to infer?</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Final takeaway</h2>
+      <div class="callout">Traditional information architecture asks: <b>How should we organize the website?</b><br><br>Personalized interfaces introduce a new question: <b>What rules should determine how the website reorganizes itself for each user?</b></div>
+    </section>
+
+    <div class="footer">COGS 187A · Usability & Information Architecture · UC San Diego</div>
+  </main>
+</div>
+</body>
+</html>
