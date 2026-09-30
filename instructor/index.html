@@ -252,8 +252,9 @@ function countArrayValues(rows,key){
 function renderActivity1(rows){
   const root=document.getElementById('activity1Overview'), list=document.getElementById('activity1List');
   if(!rows.length){root.innerHTML='<div class="card"><h2>Class Activity 1 · Personalized Information Architecture</h2><p class="muted">No Activity 1 submissions yet. This page will update as groups submit.</p></div>';list.innerHTML='';return;}
-  const adapt=countBy(rows,'ia_adaptation'), boundary=countBy(rows,'personalization_boundary'), pdata=countArrayValues(rows,'personalization_data');
-  const maya=countBy(rows,'maya_primary'), daniel=countBy(rows,'daniel_primary'), sam=countBy(rows,'sam_primary');
+  const adapt=countBy(rows,'navigation_choice'), boundary=countBy(rows,'personalization_boundary'), pdata=countArrayValues(rows,'personalization_data');
+  const maya=countBy(rows,'maya_priorities'), daniel=countBy(rows,'daniel_priorities'), sam=countBy(rows,'sam_priorities');
+  const aiAgree=countBy(rows,'ai_agreement'), aiAssess=countBy(rows,'ai_personalization_assessment'), aiTools=countBy(rows,'ai_tool');
   const students=studentCount(rows);
   root.innerHTML=
     '<div class="card"><h2>Class Activity 1 · Personalized Information Architecture</h2><div class="summary-grid">'+
@@ -261,14 +262,21 @@ function renderActivity1(rows){
     '<div class="metric"><div class="num">'+students+'</div><div class="lab">Students listed</div></div>'+
     '<div class="metric"><div class="num">'+(adapt[0]?.name||'—')+'</div><div class="lab">Most common adaptation stance</div></div>'+
     '<div class="metric"><div class="num">'+(boundary[0]?.count||0)+'</div><div class="lab">Groups in leading data-boundary choice</div></div></div></div>'+
+    '<div class="charts-grid"><div class="card chart-card"><h2>How did groups respond to the AI?</h2><p class="summary-note">Whether students mostly accepted, selectively edited, or overrode the AI recommendation.</p><div class="chart-wrap"><canvas id="a1AiAgreeChart"></canvas></div></div>'+
+    '<div class="card chart-card"><h2>Did the AI personalize too much?</h2><p class="summary-note">Students assessed the degree of personalization after comparing all three personas.</p><div class="chart-wrap"><canvas id="a1AiAssessChart"></canvas></div></div></div>'+
+    '<div class="card chart-card"><h2>AI tools used in Activity 1</h2><p class="summary-note">Number of groups using each AI tool for the persona comparison.</p><div class="chart-wrap"><canvas id="a1AiToolsChart"></canvas></div></div>'+
     '<div class="charts-grid"><div class="card chart-card"><h2>How much should the information architecture adapt?</h2><p class="summary-note">Each group selected one position.</p><div class="chart-wrap"><canvas id="a1AdaptChart"></canvas></div></div>'+
     '<div class="card chart-card"><h2>Where should personalization stop?</h2><p class="summary-note">Each group selected one data-use boundary.</p><div class="chart-wrap"><canvas id="a1BoundaryChart"></canvas></div></div></div>'+
     '<div class="card chart-card"><h2>What data may the system use?</h2><p class="summary-note">Groups could select multiple data sources.</p><div class="chart-wrap"><canvas id="a1DataChart"></canvas></div></div>'+
     '<div class="card chart-card"><h2>Highest-priority content by persona</h2><p class="summary-note">Compare what groups put first for Maya, Daniel, and Sam.</p><div class="chart-wrap"><canvas id="a1PersonaChart"></canvas></div></div>'+
-    '<div class="grid"><div class="card"><h2>Design principles from the class</h2>'+rows.slice(0,6).map(r=>'<div class="quote"><b>'+esc(r.group_name)+':</b> '+esc(r.design_principle)+'</div>').join('')+'</div>'+
+    '<div class="grid"><div class="card"><h2>What students changed or rejected from AI</h2>'+rows.slice(0,8).map(r=>'<div class="quote"><b>'+esc(r.group_name)+':</b> '+esc(r.ai_override_reason||'—')+'</div>').join('')+'</div>'+
+    '<div class="card"><h2>Design principles from the class</h2>'+rows.slice(0,6).map(r=>'<div class="quote"><b>'+esc(r.group_name)+':</b> '+esc(r.final_principle)+'</div>').join('')+'</div></div><div class="grid">'+
     '<div class="card"><h2>Discussion prompts from the results</h2><ul class="theme-list"><li>Did the class favor stable navigation with personalized priorities, or fully different structures?</li><li>Which persona produced the strongest agreement about what should come first?</li><li>Which data sources created the most disagreement?</li><li>Where is the tradeoff between relevance and a stable mental model?</li></ul></div></div>';
 
   if(window.Chart){
+    new Chart(document.getElementById('a1AiAgreeChart'),{type:'pie',data:{labels:aiAgree.map(x=>x.name),datasets:[{data:aiAgree.map(x=>x.count)}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:12}}}}});
+    new Chart(document.getElementById('a1AiAssessChart'),{type:'bar',data:{labels:aiAssess.map(x=>x.name),datasets:[{data:aiAssess.map(x=>x.count),label:'Groups'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{precision:0}},x:{ticks:{maxRotation:35,minRotation:15}}}}});
+    new Chart(document.getElementById('a1AiToolsChart'),{type:'bar',data:{labels:aiTools.map(x=>x.name),datasets:[{data:aiTools.map(x=>x.count),label:'Groups'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{precision:0}}}}});
     new Chart(document.getElementById('a1AdaptChart'),{type:'bar',data:{labels:adapt.map(x=>x.name),datasets:[{data:adapt.map(x=>x.count),label:'Groups'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{precision:0}},x:{ticks:{maxRotation:35,minRotation:15}}}}});
     new Chart(document.getElementById('a1BoundaryChart'),{type:'pie',data:{labels:boundary.map(x=>x.name),datasets:[{data:boundary.map(x=>x.count)}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:12}}}}});
     new Chart(document.getElementById('a1DataChart'),{type:'bar',data:{labels:pdata.map(x=>x.name),datasets:[{data:pdata.map(x=>x.count),label:'Groups allowing use'}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{precision:0}},y:{ticks:{autoSkip:false}}}}});
@@ -279,7 +287,7 @@ function renderActivity1(rows){
   list.innerHTML='';
   for(const r of rows){
     const el=document.createElement('article');el.className='card';
-    el.innerHTML='<h2>'+esc(r.group_name)+'</h2><p><b>Students:</b> '+esc(r.student_names)+'</p><div class="grid"><div class="field"><b>Maya</b>'+esc(r.maya_primary)+' · '+esc(r.maya_cta)+'</div><div class="field"><b>Daniel</b>'+esc(r.daniel_primary)+' · '+esc(r.daniel_cta)+'</div><div class="field"><b>Sam</b>'+esc(r.sam_primary)+' · '+esc(r.sam_cta)+'</div><div class="field"><b>Adaptation stance</b>'+esc(r.ia_adaptation)+'</div><div class="field"><b>Personalization boundary</b>'+esc(r.personalization_boundary)+'</div><div class="field"><b>Allowed data</b>'+esc((r.personalization_data||[]).join(', ')||'None selected')+'</div><div class="field"><b>Biggest benefit</b>'+esc(r.biggest_benefit)+'</div><div class="field"><b>Biggest risk</b>'+esc(r.biggest_risk)+'</div><div class="field" style="grid-column:1/-1"><b>Design principle</b>'+esc(r.design_principle)+'</div></div>';
+    el.innerHTML='<h2>'+esc(r.group_name)+'</h2><p><b>Students:</b> '+esc(r.student_names)+'</p><div class="grid"><div class="field"><b>Maya</b>'+esc(r.maya_priorities)+' · '+esc(r.maya_cta)+'</div><div class="field"><b>Daniel</b>'+esc(r.daniel_priorities)+' · '+esc(r.daniel_cta)+'</div><div class="field"><b>Sam</b>'+esc(r.sam_priorities)+' · '+esc(r.sam_cta)+'</div><div class="field"><b>Adaptation stance</b>'+esc(r.navigation_choice)+'</div><div class="field"><b>Personalization boundary</b>'+esc(r.personalization_boundary)+'</div><div class="field"><b>Allowed data</b>'+esc((r.personalization_data||[]).join(', ')||'None selected')+'</div><div class="field"><b>AI tool</b>'+esc(r.ai_tool)+'</div><div class="field"><b>AI agreement</b>'+esc(r.ai_agreement)+'</div><div class="field"><b>AI personalization assessment</b>'+esc(r.ai_personalization_assessment)+'</div><div class="field"><b>AI kept / changed / rejected</b>'+esc(r.ai_override_reason)+'</div><div class="field"><b>Biggest benefit</b>'+esc(r.biggest_benefit)+'</div><div class="field"><b>Biggest risk</b>'+esc(r.biggest_risk)+'</div><div class="field" style="grid-column:1/-1"><b>Design principle</b>'+esc(r.final_principle)+'</div></div>';
     list.appendChild(el);
   }
 }
