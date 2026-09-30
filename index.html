@@ -10,7 +10,7 @@
   <style>
     :root{--bg:#f7f8fb;--card:#fff;--text:#111827;--muted:#667085;--line:#e5e7eb;--accent:#182b49;--soft:#eef3f8;--good:#146c43;--bad:#b42318}
     *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text)}
-    .wrap{max-width:1120px;margin:auto;padding:34px 20px 64px}.top{display:flex;gap:20px;align-items:flex-start;justify-content:space-between;margin-bottom:20px}
+    .shell{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;padding:28px 18px;background:#fff;border-right:1px solid var(--line)}.brand{font-weight:800;color:var(--accent);font-size:14px;margin-bottom:24px}.navlink{display:block;text-decoration:none;color:#344054;padding:11px 12px;border-radius:10px;margin:6px 0;font-size:14px;font-weight:600}.navlink:hover{background:#f2f4f7}.navlink.active{background:var(--accent);color:white}.navmeta{font-size:11px;color:var(--muted);margin:4px 12px 18px}.wrap{max-width:1120px;margin:auto;padding:34px 20px 64px}.top{display:flex;gap:20px;align-items:flex-start;justify-content:space-between;margin-bottom:20px}
     h1{font-size:32px;line-height:1.12;margin:4px 0 8px}.eyebrow{font-size:13px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
     .sub{color:var(--muted);max-width:780px;line-height:1.55}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin:18px 0;box-shadow:0 4px 18px rgba(17,24,39,.03)}
     .card h2{font-size:19px;margin:0 0 14px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.grid4{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -20,10 +20,18 @@
     .btn{border:0;border-radius:11px;padding:12px 18px;font-weight:800;font-size:14px;cursor:pointer}.btn.primary{background:var(--accent);color:white}.btn.secondary{background:white;color:var(--accent);border:1px solid #c7d0dd}.actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.status{font-size:13px;color:var(--muted)}
     .success{display:none;background:#ecfdf3;border:1px solid #abefc6;color:var(--good);padding:16px;border-radius:14px;margin-top:16px}.error{display:none;background:#fef3f2;border:1px solid #fecdca;color:var(--bad);padding:16px;border-radius:14px;margin-top:16px}
     .required{color:#b42318}.footer{font-size:12px;color:var(--muted);margin-top:28px}.privacy{font-size:12px;color:var(--muted);line-height:1.5}
-    @media(max-width:760px){.grid2,.grid4,.steps{grid-template-columns:1fr}.top{display:block}h1{font-size:27px}}
+    @media(max-width:760px){.shell{display:block}.sidebar{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:14px 16px}.brand{margin-bottom:10px}.navlink{display:inline-block;margin:4px 6px 4px 0}.navmeta{display:none}.grid2,.grid4,.steps{grid-template-columns:1fr}.top{display:block}h1{font-size:27px}}
   </style>
 </head>
 <body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">COGS 187A</div>
+      <a class="navlink active" href="/">Class Activity 0</a>
+      <div class="navmeta">AI and Knowledge of the User</div>
+      <a class="navlink" href="/activity1">Class Activity 1</a>
+      <div class="navmeta">Personalized Interfaces</div>
+    </aside>
   <main class="wrap">
     <div class="top"><div><div class="eyebrow">COGS 187A · Class Activity 0</div><h1>AI and Knowledge of the User</h1><div class="sub">Work with your group to compare what two AI tools create before and after you give them information about the intended users. Upload your evidence and submit one group response here.</div></div></div>
 
@@ -83,6 +91,7 @@
     </form>
     <div class="footer">COGS 187A · Usability & Information Architecture · UC San Diego</div>
   </main>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
   <script>
