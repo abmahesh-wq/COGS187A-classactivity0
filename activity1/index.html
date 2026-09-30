@@ -31,12 +31,17 @@ label{display:block;font-size:13px;font-weight:700;margin-bottom:7px}input,texta
 
 <section class="card"><h2>Content inventory</h2><div class="callout">Join the club · Upcoming events · Beginner guide · Phone photography · Advanced workshops · Competitions · Member gallery · Equipment resources · Social events · About · Contact</div></section>
 
-<section class="card"><h2>Part 1 · Personalize the IA</h2><ol class="steps">
+<section class="card"><h2>Part 1 · Make your own information architecture decisions</h2><ol class="steps">
 <li>For each user, choose what should receive the <b>highest homepage priority</b>.</li>
 <li>Decide the user's main call to action.</li>
 <li>Discuss what should stay consistent across users and what can adapt.</li>
 <li>Focus on hierarchy, navigation, and task completion—not colors or visual style.</li>
 </ol></section>
+
+<section class="card"><h2>Part 2 · Ask AI to do the same task</h2>
+<div class="callout"><b>Use one AI tool for all three users.</b><br><br>Prompt:<br><br>“Design the information architecture for a university photography club homepage for this user: [PASTE USER PROFILE]. From this content inventory — Join the club, Upcoming events, Beginner guide, Phone photography, Advanced workshops, Competitions, Member gallery, Equipment resources, Social events, About, Contact — choose what should receive highest priority, recommend the primary navigation and main call-to-action, and explain what you changed and why.”</div>
+<ol class="steps" style="margin-top:16px"><li>Run the prompt once for Maya, once for Daniel, and once for Sam.</li><li>Compare the AI's priorities with the choices your group made first.</li><li>Decide what you would keep, change, or reject from the AI recommendation.</li></ol>
+</section>
 
 <form id="activity1Form">
 <section class="card"><h2>Your group</h2><div class="grid2">
@@ -50,7 +55,7 @@ label{display:block;font-size:13px;font-weight:700;margin-bottom:7px}input,texta
 <div><label>Sam's highest-priority content <span class="required">*</span></label><select id="samPrimary" required></select><label style="margin-top:12px">Sam's primary CTA <span class="required">*</span></label><input id="samCta" required placeholder="e.g., RSVP to next event"></div>
 </div></section>
 
-<section class="card"><h2>How far should the IA adapt?</h2>
+<section class="card"><h2>How far should the information architecture adapt?</h2>
 <label>Your group's position <span class="required">*</span></label>
 <select id="iaAdaptation" required>
 <option value="">Choose one…</option><option>Same IA for everyone</option><option>Mostly same, lightly personalized</option><option>Different priorities, same core navigation</option><option>Substantially different IA by user</option>
@@ -61,6 +66,13 @@ label{display:block;font-size:13px;font-weight:700;margin-bottom:7px}input,texta
 <label style="margin-top:16px">Where should the personalization boundary be? <span class="required">*</span></label>
 <select id="boundary" required><option value="">Choose one…</option><option>Explicitly provided data only</option><option>Explicit data + on-site behavior</option><option>Include inferred interests</option><option>Use any lawful data that improves the experience</option></select>
 </section>
+
+<section class="card"><h2>Compare your decisions with the AI</h2><div class="grid2">
+<div><label>AI tool used <span class="required">*</span></label><input id="aiTool" required placeholder="e.g., ChatGPT, Claude, Gemini"></div>
+<div><label>Overall, how did your group respond to the AI? <span class="required">*</span></label><select id="aiAgreement" required><option value="">Choose one…</option><option>Mostly agreed with AI</option><option>Mixed — accepted some, changed some</option><option>Mostly overrode AI</option></select></div>
+<div><label>How much did the AI personalize? <span class="required">*</span></label><select id="aiAssessment" required><option value="">Choose one…</option><option>AI personalized too little</option><option>AI personalized about right</option><option>AI personalized too much</option></select></div>
+<div><label>What was the most important thing you kept, changed, or rejected? <span class="required">*</span></label><textarea id="aiOverride" required placeholder="Point to a specific AI recommendation and explain your decision."></textarea></div>
+</div></section>
 
 <section class="card"><h2>Group conclusion</h2><div class="grid2">
 <div><label>Biggest usability benefit <span class="required">*</span></label><textarea id="benefit" required placeholder="What becomes easier or more relevant?"></textarea></div>
@@ -83,6 +95,6 @@ for(const id of ['mayaPrimary','danielPrimary','samPrimary']){const s=document.g
 const dataOptions=['Self-selected skill level','Previous club events attended','Pages clicked on this site','Camera / device used','Approximate location','Age','Social-media activity','Other websites visited','Past AI conversations'];
 document.getElementById('dataChoices').innerHTML=dataOptions.map((x,i)=>'<label class="check"><input type="checkbox" name="pdata" value="'+x+'"><span>'+x+'</span></label>').join('');
 async function ensureUser(){const {data:{session}}=await sb.auth.getSession();if(session?.user){currentUser=session.user;return;}const {data,error}=await sb.auth.signInAnonymously();if(error)throw error;currentUser=data.user;}
-document.getElementById('activity1Form').addEventListener('submit',async e=>{e.preventDefault();const btn=document.getElementById('submitBtn'),status=document.getElementById('status'),ok=document.getElementById('success'),err=document.getElementById('error');btn.disabled=true;ok.style.display='none';err.style.display='none';status.textContent='Submitting…';try{await ensureUser();const pdata=[...document.querySelectorAll('input[name="pdata"]:checked')].map(x=>x.value);const payload={submitted_by:currentUser.id,group_name:groupName.value.trim(),student_names:studentNames.value.trim(),maya_primary:mayaPrimary.value,daniel_primary:danielPrimary.value,sam_primary:samPrimary.value,maya_cta:mayaCta.value.trim(),daniel_cta:danielCta.value.trim(),sam_cta:samCta.value.trim(),ia_adaptation:iaAdaptation.value,personalization_data:pdata,personalization_boundary:boundary.value,biggest_benefit:benefit.value.trim(),biggest_risk:risk.value.trim(),design_principle:principle.value.trim()};const {error}=await sb.from('activity1_submissions').insert(payload);if(error)throw error;status.textContent='';ok.style.display='block';btn.textContent='Submitted';}catch(e){err.textContent=e.message||'Something went wrong.';err.style.display='block';status.textContent='';btn.disabled=false;}});
+document.getElementById('activity1Form').addEventListener('submit',async e=>{e.preventDefault();const btn=document.getElementById('submitBtn'),status=document.getElementById('status'),ok=document.getElementById('success'),err=document.getElementById('error');btn.disabled=true;ok.style.display='none';err.style.display='none';status.textContent='Submitting…';try{await ensureUser();const pdata=[...document.querySelectorAll('input[name="pdata"]:checked')].map(x=>x.value);const payload={submitted_by:currentUser.id,group_name:groupName.value.trim(),student_names:studentNames.value.trim(),maya_priorities:mayaPrimary.value,maya_cta:mayaCta.value.trim(),daniel_priorities:danielPrimary.value,daniel_cta:danielCta.value.trim(),sam_priorities:samPrimary.value,sam_cta:samCta.value.trim(),navigation_choice:iaAdaptation.value,personalization_data:pdata,personalization_boundary:boundary.value,biggest_benefit:benefit.value.trim(),biggest_risk:risk.value.trim(),final_principle:principle.value.trim(),ai_tool:aiTool.value.trim(),ai_agreement:aiAgreement.value,ai_personalization_assessment:aiAssessment.value,ai_override_reason:aiOverride.value.trim()};const {error}=await sb.from('activity1_submissions').insert(payload);if(error)throw error;status.textContent='';ok.style.display='block';btn.textContent='Submitted';}catch(e){err.textContent=e.message||'Something went wrong.';err.style.display='block';status.textContent='';btn.disabled=false;}});
 ensureUser().catch(console.error);
 </script></body></html>
